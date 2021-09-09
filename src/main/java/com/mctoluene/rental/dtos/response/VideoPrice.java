@@ -1,13 +1,12 @@
 package com.mctoluene.rental.dtos.response;
 
+import lombok.Data;
+
+@Data
 public class VideoPrice {
-    private double price;
+    private Double price;
 
-    public void setPrice(double price) {
+    public VideoPrice(Double price) {
         this.price = price;
-    }
-
-    public double getPrice() {
-        return price;
     }
 }

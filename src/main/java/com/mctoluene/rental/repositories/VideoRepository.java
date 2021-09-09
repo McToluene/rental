@@ -1,8 +1,8 @@
 package com.mctoluene.rental.repositories;
 
 import com.mctoluene.rental.entities.Video;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VideoRepository extends PagingAndSortingRepository<Video, Long> {
-    Video findFirstByTitle(String title);
+public interface VideoRepository extends JpaRepository<Video, Long> {
+
 }
