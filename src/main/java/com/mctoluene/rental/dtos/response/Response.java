@@ -1,5 +1,8 @@
 package com.mctoluene.rental.dtos.response;
 
+import lombok.Data;
+
+@Data
 public class Response<T> {
     private T data;
     private boolean succeeded;
@@ -9,17 +12,5 @@ public class Response<T> {
         this.data = data;
         this.message = message;
         this.succeeded = succeeded;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public boolean isSucceeded() {
-        return succeeded;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

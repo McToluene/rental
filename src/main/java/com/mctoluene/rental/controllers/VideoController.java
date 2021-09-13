@@ -1,15 +1,12 @@
 package com.mctoluene.rental.controllers;
 
-import com.mctoluene.rental.dtos.request.PaginationFilter;
 import com.mctoluene.rental.dtos.request.VideoDetail;
-import com.mctoluene.rental.dtos.response.PagedResponse;
 import com.mctoluene.rental.dtos.response.Response;
 import com.mctoluene.rental.dtos.response.VideoPrice;
 import com.mctoluene.rental.interfaces.VideoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("video")
@@ -21,15 +18,13 @@ public class VideoController {
     }
 
     @GetMapping
-    public PagedResponse get(@RequestParam int pageNumber, @RequestParam int pageSize){
-        PaginationFilter filter = new PaginationFilter(pageNumber, pageSize);
-        var videos = videoService.getVideos(filter);
-        return new PagedResponse<>(videos.getContent(), "Videos fetched successfully", true, filter.getPageNumber(), filter.getPageSize());
+    public Page getVideos(Pageable page) {
+        return videoService.getVideos(page);
     }
 
-    @GetMapping("/price")
-    public Response<VideoPrice> getPrice(@RequestParam String name, @RequestParam String title, @RequestParam int days){
-        VideoPrice videoPrice = videoService.getPrice(new VideoDetail(name, title, days));
+    @PostMapping("/{id}/price")
+    public Response<VideoPrice> calculatePrice(@PathVariable Long id, @RequestBody VideoDetail videoDetail) {
+        VideoPrice videoPrice = videoService.getPrice(videoDetail, id);
         return new Response<>(videoPrice, "Price fetched successfully", true);
     }
 }
