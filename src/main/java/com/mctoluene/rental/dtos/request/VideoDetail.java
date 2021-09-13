@@ -11,5 +11,4 @@ public class VideoDetail {
         this.name = name;
         this.days = days;
     }
-
 }
