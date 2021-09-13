@@ -1,7 +1,7 @@
 package com.mctoluene.rental.entities;
 
 import com.mctoluene.rental.dtos.response.VideoPrice;
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class VideoPriceFactory {
@@ -18,4 +18,5 @@ public class VideoPriceFactory {
             price -= year;
         return new VideoPrice(price);
     }
+
 }

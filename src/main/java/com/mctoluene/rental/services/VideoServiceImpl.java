@@ -40,7 +40,9 @@ public class VideoServiceImpl implements VideoService {
             Optional<Video> video = videoRepository.findById(id);
             if (video.isPresent()) {
                 VideoPriceFactory factory = new VideoPriceFactory();
-                BeanUtils.copyProperties(video, factory);
+                factory.setVideoType(video.get().getVideoType());
+                factory.setYear(video.get().getYear());
+                factory.setMaximumAge(video.get().getMaximumAge());
                 videoPrice = factory.getVideoPrice(detail.getDays());
             }
         } catch (Exception ex) {
